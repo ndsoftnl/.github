@@ -100,9 +100,9 @@ chat:
   auto_reply: true
   integrations:
     jira:
-      usage: off
+      usage: disabled
     linear:
-      usage: off
+      usage: disabled
   # ------------------------------------------------------------------------------------
 
 # --- collapsible: AI learning + docs integration ---------------------------------------
@@ -114,11 +114,11 @@ knowledge_base:
     enabled: false
     filePatterns: ['CONTRIBUTING.md', 'docs/code-guidelines.md']
   learnings:
-    scope: org
+    scope: global
   issues:
-    scope: org
+    scope: global
   pull_requests:
-    scope: org
+    scope: global
 # ---------------------------------------------------------------------------------------
 
 # --- collapsible: AI code generation suggestions ---------------------------------------
@@ -127,7 +127,7 @@ code_generation:
     language: en-US
 
   unit_tests:
-    # Allows AI-generated unit tests to follow local conventions.
+    # Instructions for AI-generated unit tests
     path_instructions:
       - path: 'tests/Unit/**'
         instructions: |
