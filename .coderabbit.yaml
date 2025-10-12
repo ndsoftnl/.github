@@ -1,5 +1,6 @@
 # =======================================================
-#  CodeRabbit AI Review Configuration (Laravel + JS)
+#  CodeRabbit AI Review Configuration
+#  For Laravel + JS projects
 #  Reference: https://docs.coderabbit.ai/config
 # =======================================================
 
@@ -61,7 +62,7 @@ reviews:
   # ------------------------------------------------------------------------------------
 
 tools:
-  # Core linters for PHP + JS
+  # --- Core linters for Laravel (PHP) and JS -------------------------------------------
   phpstan:
     enabled: true
     level: 3
@@ -101,7 +102,7 @@ chat:
     jira:
       usage: off
     linear:
-      usage: auto
+      usage: off
   # ------------------------------------------------------------------------------------
 
 # --- collapsible: AI learning + docs integration ---------------------------------------
@@ -116,9 +117,6 @@ knowledge_base:
     scope: org
   issues:
     scope: org
-  linear:
-    usage: auto
-    team_keys: []
   pull_requests:
     scope: org
 # ---------------------------------------------------------------------------------------
@@ -127,5 +125,23 @@ knowledge_base:
 code_generation:
   docstrings:
     language: en-US
-  unit_tests: {}
+
+  unit_tests:
+    # Allows AI-generated unit tests to follow local conventions.
+    path_instructions:
+      - path: 'tests/Unit/**'
+        instructions: |
+          Each test method must begin with `it_`.
+          Annotate each test method with `#[Test]`.
+          Each test method must contain `$this->markTestIncomplete();` by default.
+          Prefer Fakes and Fixtures over Mocks.
+          Structure tests with `it_` functions and place happy paths last.
+          Reusable logic (e.g., fixtures) must reside in an abstract test case.
+      - path: 'tests/Feature/**'
+        instructions: |
+          Each test method must begin with `it_`.
+          Annotate each test method with `#[Test]`.
+          Default to `$this->markTestIncomplete();` until test logic is finalized.
+          Use Laravel’s HTTP helpers (`->postJson()`, `->getJson()`, etc.).
+          Avoid inline fixture setup; use factories and seeders.
 # ---------------------------------------------------------------------------------------
